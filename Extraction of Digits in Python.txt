@@ -1,0 +1,57 @@
+Extraction of Digits in Python | Explained Step-by-Step
+codeanddebugBy codeanddebug12 May 2025Updated:7 July 2025No Comments3 Mins Read
+Share
+
+Share
+Welcome to this article on extraction of digits in Python. Explained step-by-step with the intuitive approach, code, explanation, dry run and edge cases.
+
+By the end of this article, you’ll have a fair idea on how to extract digits in Python.
+
+Content:
+ [show]
+1.What does the Problem (Extraction of Digits in Python) say?
+The problem is to extract & print each digit of a given integer number starting from the last digit. The digits should be printed without spaces or any separators.
+
+For example, given the input 1234, the output should be 4321.
+
+2.Intuition behind the Solution
+To solve this problem, the intuitive approach is to:
+
+Isolate the last digit of the number by using the modulus operation (% 10)
+Print the isolated digit
+Remove the last digit from the number by using integer division (// 10)
+Repeat the process until all digits have been extracted and printed
+This works because the modulus operation gives the remainder when the number is divided by 10, which is effectively the last digit of the number. Integer division by 10 removes the last digit from the number.
+
+Repeating these steps will eventually extract and print all digits in reverse order.
+
+3.Code (extract digits in Python)
+def extractDigits(num: int) -> None:
+    n = num
+    while n > 0:
+        last_digit = n % 10
+        print(last_digit, end="")
+        n = n // 10
+
+
+extractDigits(4356)
+4.Explanation
+The provided code, extractDigits(num: int) -> None, does the following:
+
+Takes an integer “num” as input
+Uses a “while loop” to repeatedly extract the last digit of the number & print it until the number becomes zero
+Inside the loop:
+The last digit is obtained using the modulus operation (n % 10)
+The last digit is printed
+The number is updated to exclude the last digit by using integer division (n // 10)
+5.Dry Run
+Let’s dry run the code with an example below:
+
+Extraction of Digits - Dry Run - Graphical Representation
+6.Edge Cases
+Single digit input:
+If “num” is a single digit, say 5, the output will be 5, which is the same as the input.
+Zero input:
+If “num” is 0, the code will not enter the while loop and will not print anything. Depending on the requirement, you might want to handle this case separately to ensure 0 is printed.
+Negative input:
+The provided code does not handle negative numbers. If “num” is -1234, the code will not work as intended. To handle negative numbers, you could take the absolute value of “num” before processing.
