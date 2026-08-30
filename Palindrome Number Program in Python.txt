@@ -1,0 +1,266 @@
+Palindrome Number Program in Python | Leetcode #9
+codeanddebugBy codeanddebug28 May 2025Updated:4 April 2026No Comments5 Mins Read
+Share
+
+Share
+Hello everyone! In this article, we’ll guide you through a thorough explanation of Leetcode #9. Explaining the palindrome number program in Python. The [Problem Link] is given here for your quick reference.
+
+Examples of Palindrome Number Program in Python:
+Example 1:
+
+Input: x = 121
+Output: true
+Explanation: 121 reads as 121 from left to right and from right to left.
+
+Example 2:
+
+Input: x = -121
+Output: false
+Explanation: From left to right, it reads -121. From right to left, it becomes 121-. Therefore it is not a palindrome.
+
+Example 3:
+
+Input: x = 10
+Output: false
+Explanation: Reads 01 from right to left. Therefore it is not a palindrome.
+Example 1:
+
+  Input: x = 121
+  Output: true
+  Explanation: 121 reads as 121 from left to right and from right to left.
+
+Example 2:
+
+  Input: x = -121
+  Output: false
+  Explanation: From left to right, it reads -121. From right to left, it becomes 121-. Therefore it is not a palindrome.
+
+Example 3:
+
+  Input: x = 10
+  Output: false
+  Explanation: Reads 01 from right to left. Therefore it is not a palindrome.
+Understand by watching video
+
+1. Optimal Solution
+Problem Statement:
+Objective: The given code aims to determine whether a given integer “x” is a palindrome. A palindrome is a number that reads the same backward as forward.
+
+Purpose: The function “isPalindrome” is designed to check if the integer “x” remains the same when its digits are reversed.
+
+Expected Input and Output:
+
+Input: An integer “x”.
+Output: A boolean value True if “x” is a palindrome, and False otherwise.
+Intuition and Approach:
+Intuition: To check if a number is a palindrome, we can reverse its digits and then compare the reversed number with the original number. If they are equal, the number is a palindrome.
+
+Approach:
+
+Handle negative numbers separately, as they cannot be palindromes
+Convert the number to its absolute value for easier processing (although the check for negativity at the beginning makes this unnecessary in the given code)
+Initialize a variable to store the reversed number
+Use a loop to extract the last digit of the number and build the reversed number
+Compare the reversed number with the original number to determine if it is a palindrome
+Code:
+class Solution:
+def isPalindrome(self, x: int) -> bool:
+if x < 0:
+return False
+num = x
+palindrome_number = 0
+while num > 0:
+last_digit = num % 10
+palindrome_number = (palindrome_number * 10) + last_digit
+num //= 10
+return palindrome_number == x
+class Solution:
+    def isPalindrome(self, x: int) -> bool:
+        if x < 0:
+            return False
+        num = x
+        palindrome_number = 0
+        while num > 0:
+            last_digit = num % 10
+            palindrome_number = (palindrome_number * 10) + last_digit
+            num //= 10
+        return palindrome_number == x
+Negative Number Check: The function immediately returns False if “x” is negative, as negative numbers cannot be palindromes.
+Initialize Variables: The variable “num” is initialized to “x” and “palindrome_number” is initialized to 0 to build the reversed number.
+Loop to Reverse Digits:
+While “num” is greater than 0, the last digit is extracted using num % 10.
+This digit is appended to “palindrome_number” by multiplying palindrome_number by 10 and adding the digit.
+The last digit is removed from “num” using integer division by 10.
+Return Comparison: After the loop, the function returns True if “palindrome_number” is equal to “x”, and False otherwise.
+Dry Run:
+Let’s walk through a step-by-step execution with a sample input:
+
+
+Also read about Leetcode #7 : Reverse Integer Python Program.
+
+Potential Edge Cases:
+Negative Numbers:
+Negative numbers should immediately return False.
+Single-Digit Numbers:
+Any single-digit number should return True as it is inherently a palindrome (e.g., x = 5).
+Zero:
+x = 0 should return True as it reads the same forward and backward.
+Handling Edge Cases:
+The given code handles negative numbers and zero correctly.
+Single-digit numbers are also handled correctly by the loop and return comparison.
+Time and Space Complexity:
+Time Complexity: The time complexity is “O(log10​ . N)”, where “N” is the absolute value of the input number. This is because the number of iterations in the loop is proportional to the number of digits in the number.
+
+Space Complexity: The space complexity is “O(1)”. The function uses a fixed amount of space regardless of the input size.
+
+Some Questions for You
+Why do negative numbers always return False in palindrome checks?
+Because of the negative sign (-). When reversed, the sign shifts position (e.g., -121 → 121-), which is not equal to the original number. Since the structure changes, it can never be a palindrome.
+
+Why does a number ending with 0 (like 10) fail the palindrome test?
+When reversed, leading zeros are dropped. For example, 10 becomes 01, which is interpreted as 1. Since 10 ≠ 1, it is not a palindrome. This is a subtle but important edge case.
+
+Can we solve this problem without reversing the entire number?
+Yes. An optimized approach reverses only half of the number and compares it with the other half. This reduces unnecessary computation and also helps prevent integer overflow in some languages.
+
+Is there any risk of integer overflow in this approach?
+In Python, there is no risk because integers can grow arbitrarily large. However, in languages like C++ or Java, reversing the number may cause overflow, so additional checks are required.
+
+Why is the time complexity O(log₁₀N) instead of O(N)?
+Because we process digits, not individual values. Each iteration removes one digit by dividing the number by 10. So, the number of steps depends on the number of digits in N, which is approximately log₁₀N.
+
+Watch our python dsa course on youtube (200+ questions)
+For any changes to the document, kindly email at code@codeanddebug.in or contact us at +91-9712928220.
+
+Math
+Share.
+Facebook
+Twitter
+Pinterest
+LinkedIn
+Tumblr
+Email
+ Previous Article
+Leetcode #7 : Reverse Integer Python Program Explained
+Next Article 
+Python Program to Check Armstrong Number | Explained
+
+codeanddebug
+Website
+Related Posts
+Data Structures & Algorithms
+DSA Interview Cheat Sheet: All Patterns You Need to Know
+4 April 2026
+Data Structures & Algorithms
+Symmetric Tree | Leetcode 101 | Recursive DFS Approach
+2 September 2025
+Data Structures & Algorithms
+Binary Tree Right Side View | Leetcode 199 | BFS and DFS Approaches
+2 September 2025
+Add A Comment
+Categories
+Data Structures & Algorithms(241)
+Beginner(82)
+Expert(52)
+Intermediate(106)
+Pandas(1)
+Resume(1)
+Recent Posts
+Pandas Python: The Complete Roadmap for Beginners in 2026
+8 April 2026
+DSA Interview Cheat Sheet: All Patterns You Need to Know
+4 April 2026
+Symmetric Tree | Leetcode 101 | Recursive DFS Approach
+2 September 2025
+Binary Tree Right Side View | Leetcode 199 | BFS and DFS Approaches
+2 September 2025
+Bottom View of Binary Tree | BFS with Horizontal Distance Mapping
+2 September 2025
+Data Structures & Algorithms
+Leetcode #7 : Reverse Integer Python Program Explained
+codeanddebugBy codeanddebug28 May 2025Updated:7 July 2025No Comments3 Mins Read
+Share
+Featured Image of a question Reverse Integer on leetcode
+Share
+Hi everyone! In this article, we’ll guide you through a detailed explanation of the Reverse Integer Python Program [Problem Link].
+
+Examples:
+Example 1:
+
+  Input: x = 123
+  Output: 321
+
+Example 2:
+
+  Input: x = -123
+  Output: -321
+
+Example 3:
+
+  Input: x = 120
+  Output: 21
+1. Optimal Solution [Reverse Integer Python Program]
+Problem Statement:
+Objective: The code aims to solve the problem of reversing the digits of a 32-bit signed integer “x”.
+
+Purpose: The function reverse is designed to take an integer “x”, reverse its digits, and return the reversed integer. If the reversed integer overflows beyond the 32-bit signed integer range, it returns 0.
+
+Expected Input and Output:
+
+Input: A 32-bit signed integer “x”.
+Output: The reversed integer or 0 if the result overflows.
+Also learn Python Program to Count Number of Digits.
+
+Intuition and Approach:
+Intuition: To reverse the digits of an integer, we can repeatedly extract the last digit and build the reversed number step by step. If the original number is negative, we handle the sign separately.
+
+Approach:
+
+Check if the number is negative and store this information
+Convert the number to its absolute value for easier processing
+Initialize a variable to store the reversed number
+Use a loop to extract the last digit of the number and append it to the reversed number
+Ensure the result does not overflow the 32-bit signed integer range
+Restore the sign if the original number was negative
+Return the reversed number or 0 if it overflows
+Code:
+class Solution:
+    def reverse(self, x: int) -> int:
+        is_negative = False
+        if x < 0:
+            is_negative = True
+        num = abs(x)
+        answer = 0
+        while num > 0:
+            last_digit = num % 10
+            answer = (answer * 10) + last_digit
+            num //= 10
+
+        if answer < (-(21**31)) or answer > (2**31 - 1):
+            return 0
+        return -answer if is_negative else answer
+Check for Negativity: A boolean variable is_negative is set to True if “x” is negative
+Absolute Value: The absolute value of “x” is stored in “num” for easier manipulation
+Initialize Answer: An integer answer is initialized to 0 to build the reversed number
+Loop to Reverse Digits:
+While “num” is greater than 0, the last digit is extracted using num % 10
+This digit is appended to answer by multiplying answer by 10 and adding the digit
+The last digit is removed from “num” using integer division by 10
+Overflow Check: After the loop, check if the reversed number is within the 32-bit signed integer range. If not, return 0.
+Restore Sign: If the original number was negative, return the negated result. Otherwise, return the result.
+Dry Run:
+Let’s walk you through a step-by-step execution with a sample input
+
+Dry Run [Optimal Solution]
+Potential Edge Cases:
+Zero Input:
+If x = 0, the function should return 0
+Negative Numbers:
+For x = -123, the function should return -321
+Overflow:
+If reversing the number causes it to exceed the 32-bit signed integer range, the function should return 0.
+Examples: x = 1534236469 should return 0 because the reversed number 9646324351 exceeds the 32-bit limit.
+Time and Space Complexity:
+Time Complexity: The time complexity is O(log10​ . N), where n is the absolute value of the input number. This is because the number of iterations in the loop is proportional to the number of digits in the number.
+
+Space Complexity: The space complexity is O(1). The function uses a fixed amount of space regardless of the input size.
