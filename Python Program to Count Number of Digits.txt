@@ -1,0 +1,113 @@
+Python Program to Count Number of Digits | Explained
+codeanddebugBy codeanddebug12 May 2025Updated:7 July 2025No Comments5 Mins Read
+Share
+Python Program to Count Number of Digits Featured Image
+Share
+Python Program to Count Number of Digits [Problem Link].
+
+EXAMPLES:
+
+Input: 'X' = 2
+Output: 1
+As only one digit is ‘2’ present in ‘X’ so the answer is 1.
+
+1.Brute Force Solution
+Problem Statement:
+Objective: The code aims to solve the problem of counting the number of digits in a positive integer “n”.
+
+Purpose: The function “countDigits” is designed to determine how many digits are present in the given integer.
+
+Expected Input & Output:
+
+Input: A positive integer “n”.
+Output: An integer representing the number of digits in the input number “n”.
+Intuition and Approach:
+Intuition: To count the digits in an integer, we can repeatedly remove the last digit of the number until the number itself becomes zero. Each removal operation can be achieved by integer division by 10. The number of such operations needed to reduce the number to zero gives us the count of digits.
+
+Approach:
+
+Initialize a counter to zero
+Use a loop to repeatedly divide the number by 10
+Increment the counter for each iteration
+Stop when the number becomes zero
+Return the counter
+This approach is suitable because it directly corresponds to the number of digits in the number. By stripping away each digit one by one, we effectively count how many digits the number contains.
+
+Code:
+def countDigits(n):
+    cnt = 0
+    while n > 0:
+        cnt = cnt + 1
+        n = n // 10
+    return cnt
+Initialization: A counter variable “cnt” is initialized to 0. This will store the number of digits.
+
+Loop: A while loop runs as long as “n” is greater than 0.
+
+Increment Counter: The counter “cnt” is incremented by 1.
+Remove Last Digit: The number “n” is divided by 10 using integer division, effectively removing the last digit.
+Return Value: Once “n” becomes 0 (no digits left), the loop terminates, and the function returns the counter “cnt”, which holds the number of digits.
+
+Dry Run:
+Let’s walk through a step-by-step execution with a sample input:
+
+Python Program to Count Number of Digits - Dry Run (Brute Force Solution)
+Potential Edge Cases:
+Zero Input:
+If n = 0, the function should return 1, as 0 is a single-digit number. However, the current code returns 0. We need to handle this case separately.
+Negative Numbers:
+The function currently doesn’t handle negative numbers. We can consider taking the absolute value of n to address this.
+Large Numbers:
+The function works correctly for very large integers as Python handles arbitrarily large integers.
+Time and Space Complexity:
+Time Complexity: The time complexity is O(log10 N). This is because the number of iterations in the loop is proportional to the number of digits in the number, which is the logarithm (base 10) of the number.
+
+Space Complexity: The space complexity is O(1). The function uses a fixed amount of space regardless of the input size, only storing a few integer variables.
+
+Explore more about Time complexity & Space complexity in DSA.
+
+2.Optimal Solution
+Problem Statement:
+Objective: The given code aims to solve the problem of counting the number of digits in a positive integer “n” using a mathematical approach.
+
+Purpose: The function “countDigit” is designed to determine how many digits are present in the given integer.
+
+Expected Input and Output:
+
+Input: A positive integer “n”.
+Output: An integer representing the number of digits in the input number “n”.
+Intuition and Approach:
+Intuition: Mathematically, the number of digits in a positive integer n can be determined using logarithms. Specifically, the base-10 logarithm of a number gives the exponent to which 10 must be raised to produce that number. The number of digits in n is equal to the floor value of the logarithm (base 10) of n plus one.
+
+Approach:
+
+Compute the base-10 logarithm of “n”
+Add 1 to the result to account for the number of digits
+Convert the result to an integer, which effectively applies the floor function, giving the count of digits
+This approach is suitable because it leverages the properties of logarithms to directly compute the number of digits in constant time.
+
+Code:
+def countDigit(n: int) -> int:
+  return int(log10(n)+1)
+Import Logarithm Function: The log10 function is imported from the math module to compute the base-10 logarithm of n.
+
+Compute Number of Digits: The function “countDigit” takes an integer “n” as input.
+
+It calculates the base-10 logarithm of n using log10(n)
+It adds 1 to this result to get the count of digits
+The result is converted to an integer using int(), which effectively floors the value, ensuring the correct number of digits is returned.
+Dry Run:
+Let’s walk through a step-by-step execution with a sample input:
+
+Python Program to Count Number of Digits - Dry Run (Optimal Solution)
+Potential Edge Cases:
+Zero Input:
+If n = 0, the function would raise a math domain error because log10(0) is undefined.
+Negative Numbers:
+The function currently doesn’t handle negative numbers. Logarithms of negative numbers are undefined in real numbers.
+One (Single Digit Number):
+For n = 1, the function works correctly as log10(1) = 0 and 0 + 1 = 1.
+Time and Space Complexity:
+Time Complexity: The time complexity is O(1). Computing the logarithm and performing arithmetic operations are constant time operations.
+
+Space Complexity: The space complexity is O(1). The function uses a fixed amount of space regardless of the input size.
