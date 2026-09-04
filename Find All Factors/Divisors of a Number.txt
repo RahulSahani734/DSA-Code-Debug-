@@ -1,0 +1,30 @@
+ Problem StatementInput: A positive integer $N$ (e.g., $10, 15, 20, 36$).Output: A list containing all numbers that divide $N$ completely without a remainder ($N \pmod i == 0$).Examples:$N = 10 \implies [1, 2, 5, 10]$$N = 15 \implies [1, 3, 5, 15]$$N = 36 \implies [1, 2, 3, 4, 6, 9, 12, 18, 36]$2. Brute Force ApproachConcept:Iterate through every single integer $i$ from $1$ up to $N$. If $N$ is divisible by $i$, append $i$ to the result list.Python Code:Pythondef print_factors_brute(num):
+    result = []
+    for i in range(1, num + 1):
+        if num % i == 0:
+            result.append(i)
+    return result
+Complexity:Time Complexity: $O(N)$Space Complexity: $O(K)$, where $K$ is the total number of factors.3. Better Solution (Iterating up to $N/2$)Concept:Except for the number $N$ itself, no factor of $N$ can be greater than $N/2$. Thus, you can loop from $1$ up to $N/2$, check for factors, and manually append $N$ at the end.Python Code:Pythondef print_factors_better(num):
+    result = []
+    for i in range(1, (num // 2) + 1):
+        if num % i == 0:
+            result.append(i)
+    result.append(num)  # Append the number itself at the end
+    return result
+Complexity:Time Complexity: $O(N/2) \approx O(N)$ (after removing constant factors)Space Complexity: $O(K)$4. Optimal Solution ($\sqrt{N}$ Approach)Concept (Pair Divisors):Factors always occur in pairs. If $i$ divides $N$, then $(N // i)$ is automatically a factor too.Example ($N = 36$):$1 \times 36 = 36 \implies (1, 36)$$2 \times 18 = 36 \implies (2, 18)$$3 \times 12 = 36 \implies (3, 12)$$4 \times 9 = 36 \implies (4, 9)$$6 \times 6 = 36 \implies (6, 6)$ (If $i == N // i$, append it only once to avoid duplicates)Because pair factors duplicate after reaching $\sqrt{N}$, you only need to iterate up to $\sqrt{N}$.Python Code:Pythonfrom math import sqrt
+
+
+def print_factors_optimal(num):
+    result = []
+    # Loop from 1 up to sqrt(num)
+    for i in range(1, int(sqrt(num)) + 1):
+        if num % i == 0:
+            result.append(i)
+            # Add counterpart factor if it isn't identical (e.g., avoid duplicate 6 for 6x6)
+            if num // i != i:
+                result.append(num // i)
+
+    # Optional: Sort if output is required in ascending order
+    result.sort()
+    return result
+5. Summary TableApproachTime ComplexitySpace ComplexityDescriptionBrute Force$O(N)$$O(K)$Checks every number from $1$ to $N$.Better$O(N/2) \approx O(N)$$O(K)$Checks numbers up to $N/2$.Optimal$O(\sqrt{N})$ (unsorted)$O(\sqrt{N} + K \log K)$ (sorted)$O(K)$Checks up to $\sqrt{N}$ and extracts paired factors simultaneously.(Note: $K$ represents the total number of factors of $N$.)
