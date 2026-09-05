@@ -1,0 +1,22 @@
+Problem StatementGiven an array or list of numbers, count the frequency (number of occurrences) of each unique element and store the result as key-value pairs in a dictionary (hash map).Example:Input: nums = [5, 6, 7, 7, 1, 9, 1, 1, 5, 1, 1]Expected Output Dictionary: {5: 2, 6: 1, 7: 2, 1: 5, 9: 1}Method 1: Manual Check (if-else Approach)ConceptInitialize an empty dictionary.Iterate through each element in the list.Check if the element already exists as a key in the dictionary:If Yes: Increment its corresponding value by $1$.If No: Insert the element into the dictionary with an initial value of $1$.Python ImplementationPythondef count_frequencies_method1(nums):
+    freq_map = {}  # Empty dictionary
+
+    for i in range(len(nums)):
+        key = nums[i]
+        if key in freq_map:
+            freq_map[key] += 1  # Increment count if key exists
+        else:
+            freq_map[key] = 1  # Initialize count if key is new
+
+    return freq_map
+Complexity AnalysisTime Complexity: $O(N)$Loop runs $N$ times.Membership check (key in dict), lookup, insertion, and update operations take $O(1)$ on average.Space Complexity: $O(N)$In the worst case (all elements are unique), the dictionary stores $N$ key-value pairs.Method 2: Idiomatic Python Using .get()ConceptThe .get(key, default) method retrieves the value associated with a key if present; otherwise, it returns the provided default value (here, 0). This allows us to handle both insertion and updating in a single concise assignment statement:$$\text{freq\_map}[key] = \text{freq\_map.get}(key, 0) + 1$$Python ImplementationPythondef count_frequencies_method2(nums):
+    freq_map = {}
+    n = len(nums)
+
+    for i in range(n):
+        key = nums[i]
+        # Fetch current count (default 0 if missing) and add 1
+        freq_map[key] = freq_map.get(key, 0) + 1
+
+    return freq_map
+Complexity AnalysisTime Complexity: $O(N)$The loop iterates $N$ times.freq_map.get() operates in $O(1)$ average time.Space Complexity: $O(N)$ — Stores up to $N$ unique elements.Comparison TableMetric / FeatureMethod 1 (if-else)Method 2 (.get())Code StructureMulti-line conditional logicSingle-line updateReadabilityExplicit and beginner-friendlyPythonic and compactAverage Time Complexity$O(N)$$O(N)$Worst-Case Time Complexity$O(N^2)$ (rare hash collisions)$O(N^2)$ (rare hash collisions)Auxiliary Space$O(N)$$O(N)$Key Takeaways & Interview PointsDictionary Operations in Python:Lookup / Access: $O(1)$ average time.Insertion / Update / Deletion: $O(1)$ average time.Average vs. Worst Case:Dictionary operations are $O(1)$ on average.In extremely rare cases (due to hash collisions), dictionary operations can degrade to $O(N)$, resulting in a overall worst-case time complexity of $O(N^2)$. However, in standard technical interviews, you should state $O(1)$ average time complexity for dictionary operations.
