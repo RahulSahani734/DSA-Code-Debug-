@@ -1,0 +1,35 @@
+roblem StatementGiven an integer $N$, return a list of all its factors (divisors). A factor is a number that divides $N$ completely without leaving a remainder ($N \pmod i = 0$).Examples:$N = 10$ $\rightarrow$ [1, 2, 5, 10]$N = 15$ $\rightarrow$ [1, 3, 5, 15]$N = 25$ $\rightarrow$ [1, 5, 25]$N = 7$ (Prime Number) $\rightarrow$ [1, 7]1. Brute Force ApproachConcept:Iterate through all numbers from $1$ to $N$ and check if $N$ is divisible by each number.Python Implementation:Pythondef print_factors_brute(num):
+    result = []
+    for i in range(1, num + 1):
+        if num % i == 0:
+            result.append(i)
+    return result
+Complexity Analysis:Time Complexity: $O(N)$ — The loop executes $N$ times.Space Complexity: $O(K)$ — Auxiliary space to store $K$ factors in the output list.2. Better Approach (Iterating till $N/2$)Concept:Except for the number $N$ itself, no factor of $N$ can be greater than $N / 2$. Therefore, loop from $1$ to $N // 2$, append all divisors found, and manually append $N$ at the end.Python Implementation:Pythondef print_factors_better(num):
+    result = []
+    # Loop till N / 2
+    for i in range(1, (num // 2) + 1):
+        if num % i == 0:
+            result.append(i)
+
+    # Append the number itself
+    result.append(num)
+    return result
+Complexity Analysis:Time Complexity: $O(N/2) \approx O(N)$ — Dropping constant factors, it remains linear.Space Complexity: $O(K)$ — Where $K$ is the number of factors.3. Optimal Approach (Square Root Approach)Concept:Factors always appear in pairs. If $i$ is a divisor of $N$, then $N // i$ is also a divisor of $N$.Example ($N = 36$):$1 \times 36 = 36$$2 \times 18 = 36$$3 \times 12 = 36$$4 \times 9 = 36$$6 \times 6 = 36$Notice that after $\sqrt{N}$ (i.e., $\sqrt{36} = 6$), the factor pairs start repeating. Thus, we only need to iterate from $1$ up to $\lfloor\sqrt{N}\rfloor$.Important Edge Case:For perfect squares (e.g., $6 \times 6 = 36$), $i$ and $N // i$ will be identical. Check $N // i \neq i$ before appending the pair factor to avoid duplicate entries.Python Implementation:Pythonfrom math import sqrt
+
+
+def print_factors_optimal(num):
+    result = []
+
+    # Loop from 1 to sqrt(N)
+    for i in range(1, int(sqrt(num)) + 1):
+        if num % i == 0:
+            result.append(i)  # First factor
+
+            # Append paired factor if it's not a duplicate
+            if (num // i) != i:
+                result.append(num // i)
+
+    # Optional: Sort the result if ordered output is required
+    result.sort()
+    return result
+Complexity Analysis:Time Complexity:Without Sorting: $O(\sqrt{N})$With Sorting: $O(\sqrt{N}) + O(K \log K)$, where $K$ is the total number of factors.Space Complexity: $O(K)$ — Space required to store the $K$ factors in the output list.Summary Comparison TableApproachLoop BoundaryTime ComplexitySpace ComplexityBrute Force$1 \rightarrow N$$O(N)$$O(K)$Better$1 \rightarrow N/2$$O(N)$$O(K)$Optimal$1 \rightarrow \sqrt{N}$$O(\sqrt{N})$$O(K)$
