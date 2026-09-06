@@ -1,0 +1,47 @@
+1. What is Hashing?Hashing relies on two fundamental steps:Pre-storing: Counting and storing the frequencies of elements in a dedicated data structure (like an array or dictionary) beforehand. 
+  Fetching: Querying the frequency of any element in $\mathcal{O}(1)$ time.2. Number HashingProblem Statement:Given an array/list $N$ containing integers, and a query array $M$.
+  Find how many times each element in $M$ appears in $N$.Constraints: Values in $N$ are integers between $1$ and $10$, but the size of arrays $N$ and $M$ can be as large as $10^8$.A. Brute Force ApproachIterate through $N$ for every element in $M$ to count occurrences.Python# Brute Force
+for num in m:
+    count = 0
+    for x in n:
+        if x == num:
+            count += 1
+    print(count)
+Time Complexity: $\mathcal{O}(N \times M)$For $N = 10^8$ and $M = 10^8$, total operations $\approx 10^{16}$, causing a Time Limit Exceeded (TLE) error.Space Complexity: $\mathcal{O}(1)$B. Optimal Solution (Fixed-Size Hash List)Since elements in $N$ are constrained between $1$ and $10$, instantiate an array of size $11$ initialized to $0$, where each index acts as the key for that integer.Python# Pre-storing
+hash_list = [0] * 11
+for num in n:
+    hash_list[num] += 1
+
+# Fetching
+for num in m:
+    if num < 1 or num > 10:
+        print(0)
+    else:
+        print(hash_list[num])
+Time Complexity: $\mathcal{O}(N + M)$Total operations $\approx 2 \times 10^8$, executing safely within limits.Space Complexity: $\mathcal{O}(11) \approx \mathcal{O}(1)$ constant auxiliary space.C. Dynamic Approach (Using Dictionaries)If numbers in $N$ are arbitrary (e.g., $200, 300, 3111$) and cannot fit inside a small static array, use a Hash Map / Dictionary:  Pythonfreq_map = {}
+
+# Pre-storing
+for num in n:
+    freq_map[num] = freq_map.get(num, 0) + 1
+
+# Fetching
+for num in m:
+    print(freq_map.get(num, 0))
+3. Character HashingProblem Statement:Given a string $S$ (e.g., "aazzxyyzza...") and query list $Q$ (e.g., ['d', 'a', 'y', 'x']).  Determine the occurrence count of each character from $Q$ in $S$.  Constraints: String contains only lowercase English characters (a-z).Optimal Solution (ASCII Mapping)Since lowercase letters a-z have ASCII values from $97$ to $122$, map characters to indices $0$ through $25$ using:$$\text{Index} = \text{ASCII}(C) - 97$$Python# Pre-storing
+hash_list = [0] * 26
+
+for char in s:
+    ascii_val = ord(char)
+    index = ascii_val - 97
+    hash_list[index] += 1
+
+# Fetching
+for char in q:
+    ascii_val = ord(char)
+    index = ascii_val - 97
+    if 0 <= index < 26:
+        print(hash_list[index])
+    else:
+        print(0)
+
+Time Complexity: $\mathcal{O}(N + M)$ (where $N = \text{len}(S)$, $M = \text{len}(Q)$)Space Complexity: $\mathcal{O}(26) \approx \mathcal{O}(1)$ constant space.Summary ComparisonApproachTime ComplexitySpace ComplexityTLE Risk?Use CaseBrute Force$\mathcal{O}(N \times M)$$\mathcal{O}(1)$YesSmall dataset sizes onlyNumber Hashing (List)$\mathcal{O}(N + M)$$\mathcal{O}(\text{Max Value})$NoSmall, known numerical rangeNumber Hashing (Map)$\mathcal{O}(N + M)$$\mathcal{O}(\text{Unique Elements})$NoUnbounded/arbitrary valuesCharacter Hashing$\mathcal{O}(N + M)$$\mathcal{O}(26) \approx \mathcal{O}(1)$No
